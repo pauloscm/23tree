@@ -11,6 +11,7 @@ class Node:
         self.name = Node._name
         Node._name += 1
 
+
 class TwoThreeTree:
     # Empty tree initialized
     def __init__(self):
@@ -65,7 +66,6 @@ class TwoThreeTree:
                     mid = root.keys[1]
                     left = Node(keys=[root.keys[0]], children=root.children[:2])
                     right = Node(keys=[root.keys[2]], children=root.children[2:])
-                
                     return None, (mid, left, right)
                 else:
                     return root, None 
@@ -87,7 +87,10 @@ class TwoThreeTree:
     
     def _add_nodes_edges(self, dot, root):
         # Adding the nodes and edges to the graph
-        dot.node(str(root.name), label=" | ".join(map(str, root.keys)))
+        if len(root.keys) == 1:
+            dot.node(str(root.name), label=f"{root.keys[0]} | -")
+        else:
+            dot.node(str(root.name), label=" | ".join(map(str, root.keys)))
         if root.children:
             for child in root.children:
 
@@ -112,8 +115,7 @@ class Program:
 
     def create_tree(self):
         input_nodes = self.entry.get().strip()
-      
-        # Error checking
+
         if not input_nodes:
             messagebox.showerror("Error", "Please enter at least one node.")
             return
@@ -123,8 +125,7 @@ class Program:
         except ValueError:
             messagebox.showerror("Error", "Invalid input. Please enter space-separated integers.")
             return
-          
-        # Removing duplicates
+        
         if len(nodes) != len(set(nodes)):
             nodes = list(set(nodes))
         
@@ -134,4 +135,4 @@ class Program:
         tree.visualize_tree()
         self.main.destroy()
 
-master = Program()
+program = Program()
