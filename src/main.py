@@ -3,7 +3,7 @@ from tkinter import messagebox
 import graphviz as gv
 
 class Node:
-    # A unique 'name' has to be given to each node to be able to visualize the tree using graphviz
+    # An unique 'name' has to be given to each node to be able to visualize the tree using graphviz
     _name = 0
     def __init__(self, keys=None, children=None):
         self.keys = keys or []
@@ -115,7 +115,7 @@ class Program:
 
     def create_tree(self):
         input_nodes = self.entry.get().strip()
-
+        # Checking for common errors
         if not input_nodes:
             messagebox.showerror("Error", "Please enter at least one node.")
             return
